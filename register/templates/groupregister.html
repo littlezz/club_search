@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{%block content%}
+<form>
+{%csrf_token%}
+{{form.as_p}}
+<input typy="submit" value="submit" />
+</form>
+
+
+{%endblock%}
