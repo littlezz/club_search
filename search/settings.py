@@ -17,6 +17,7 @@ from django.core.urlresolvers import reverse_lazy
 LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_URL = reverse_lazy('logout')
+REDIRECT_URL= reverse_lazy('home')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/

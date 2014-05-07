@@ -11,10 +11,10 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.studentid
 
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
     name = models.CharField(max_length=5)
-    studentid = models.CharField(max_length=10,
-                                validators=[MinLengthValidator(10)])
+    studentid = models.CharField(max_length=10,)
+                                #validators=[MinLengthValidator(10)])
     cellphone = models.CharField(max_length=11)
 
 class UserProfileForm(ModelForm):
@@ -27,7 +27,9 @@ class UserForm(UserCreationForm):
 
 class GroupProfile(models.Model):
     def __str__(self):
-        return self.groupname
+        return self.name1
+
+    user=models.ForeignKey(User)
 
     name1 = models.CharField(max_length=5)
     studentid1 = models.CharField(max_length=10)

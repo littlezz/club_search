@@ -5,9 +5,18 @@
 <title>hei</title>
 </head>
 <body>
+header
+
 {%block content%}
 {%endblock%}
 
+<div>
+footer
+<a href="{% url 'home'%}">home</a>
+|{{user.username}}
+<a href="{%url 'edit_profile'%}">edit</a>
+<a href="{%url 'logout'%}">logout</a>
+<div>
 </body>
 
 </html>
