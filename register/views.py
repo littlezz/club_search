@@ -73,51 +73,27 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('home'))
 
-"""
+
 class EditProfile(UpdateView):
 
-    def dis(self):
-        if self.request.first_name=='single':
-            model = UserProfile
-            form_class = UserProfileForm
-            
-        else :
-            model = GroupProfile
-            form_class = GroupForm
-        return model,form_class
-        
-    model,form_class=dis()
-
     success_url= reverse_lazy('home')
+    
     def get_object(self, queryset=None):
-        return UserProfile.objects.get_or_create(user=self.request.user)[0]
+        if self.request.user.first_name=="group":
+            return GroupProfile.objects.get_or_create(user=self.request.user)[0]
+        else:
+            return UserProfile.objects.get_or_create(user=self.request.user)[0]
 
-"""
-
-
-def EditProfile(request):
-    if request.user.first_name=='single':
-        class RightView(UpdateView):
-            model = UserProfile
-            form_class = UserProfileForm
-            tempale_name='edit_profile_single.html'
-            success_url= reverse_lazy('home')
-
-            def get_object(self, queryset=None):
-                return UserProfile.objects.get_or_create(user=self.request.user)[0]
-        return RightView
-    else :
-        
-        class RightView(UpdateView):
-            model = GroupProfile
-            form_class = GroupForm
-            tempale_name='edit_profile_group.html'
-            success_url= reverse_lazy('home')
-
-            def get_object(self, queryset=None):
-                return GroupProfile.objects.get_or_create(user=self.request.user)[0]
-
-    return RightView
+    def get_form_class(self):
+        if self.request.user.first_name=="group":
+            return GroupForm
+        else:
+            return UserProfileForm
+    def get_template_names(self):
+        if self.request.user.first_name=="group":
+            return 'edit_profile_group.html'
+        else:
+            return 'edit_profile_single.html'
 
 
 def SaveForm_then_login(request,uf,upf,userType):
