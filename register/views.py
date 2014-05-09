@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import UserProfile, UserProfileForm, UserForm, GroupForm,GroupProfile
+from .models import UserProfile, UserProfileForm, UserForm, GroupForm,GroupProfile, GroupUserForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
@@ -41,7 +41,7 @@ def GroupRegister(request):
         return render(request,'groupfull.html')
     """
     if request.method == 'POST':
-        group_user_form = UserForm(request.POST,prefix='user')
+        group_user_form = GroupUserForm(request.POST,prefix='user')
         group_profile_form= GroupForm(request.POST,prefix='profile')
 
         if group_user_form.is_valid()*group_profile_form.is_valid() :
@@ -50,7 +50,7 @@ def GroupRegister(request):
             return HttpResponseRedirect(reverse('thanks'))
 
     else:
-        group_user_form = UserForm(prefix='user')
+        group_user_form = GroupUserForm(prefix='user')
         group_profile_form = GroupForm(prefix='profile')
 
     return render(request,'groupregister.html',{
@@ -100,6 +100,11 @@ def SaveForm_then_login(request,uf,upf,userType):
 
     user=uf.save(commit=False)
     user.first_name=userType
+    
+    if userType=='single':
+        user.last_name=request.POST['profile-name']
+    else : user.last_name=request.POST['user-username']
+    
     user.save()
     profile=upf.save(commit=False)
     profile.user=user
