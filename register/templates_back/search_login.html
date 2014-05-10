@@ -1,11 +1,9 @@
+{%extends "base.html" %}
 
+{%block content%}
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
-
-<label xxx red>
-    {{form.errors}}
-</label>
 
 
 <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
@@ -32,3 +30,4 @@
 
 
 
+{%endblock%}

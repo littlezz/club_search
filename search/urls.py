@@ -8,6 +8,8 @@ from register import views
 urlpatterns = patterns('',
     
     url(r'^admin/', include(admin.site.urls)),
+
+    
     url(r'^register/$',views.SingleRegister,name='single_register'),
     url(r'^thanks/$',views.thanks,name='thanks'),
     url(r'^login/$','django.contrib.auth.views.login',{'template_name':'search_login.html'},name='login'),
@@ -16,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^(?:home/|)$', views.home,name='home',),
     url(r'^logout',views.user_logout,name='logout'),
     url(r'^help/$',views.help,name='helptext'),
-
+    url(r'^start/$',views.home_start,name='start'),
+    url('^captcha/',include('captcha.urls')),
 )

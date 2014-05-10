@@ -1,0 +1,23 @@
+
+
+<html>
+<head>
+
+<title>hei</title>
+</head>
+<body>
+
+
+{%block content%}
+{%endblock%}
+
+<div>
+
+<a href="{% url 'home'%}">home</a>
+|{{user.last_name}}
+<a href="{%url 'edit_profile'%}">edit</a>
+<a href="{%url 'logout'%}">logout</a>
+<div>
+</body>
+
+</html>

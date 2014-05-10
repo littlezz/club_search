@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import MinLengthValidator,MaxLengthValidator
 from django.core.exceptions import ValidationError
 
+from captcha.fields import CaptchaField
 
 
 def validate_studentid(value):
@@ -24,11 +25,13 @@ class UserProfile(models.Model):
 
     user = models.ForeignKey(User)
     name = models.CharField(max_length=5)
-    #studentid = models.CharField(validators=[MaxLengthValidator(10),validate_studentid])
-                                #validators=[MinLengthValidator(10)])
+    
     cellphone = models.CharField(max_length=11,validators=[validate_phone,])
 
 class UserProfileForm(ModelForm):
+
+    captcha = CaptchaField()
+
     class Meta:
         model = UserProfile
         fields=('name','cellphone')
@@ -54,6 +57,7 @@ class GroupProfile(models.Model):
 
 class GroupForm(ModelForm):
 
+    captcha =CaptchaField()
     class Meta:
         model = GroupProfile
         fields=('name1','studentid1','phone1','name2','studentid2','phone2')

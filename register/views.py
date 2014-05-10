@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
 
-MAXGROUPNUMBER = 3
+MAXGROUPNUMBER = 6
 
 
 def SingleRegister(request):
@@ -14,7 +14,7 @@ def SingleRegister(request):
         
         uf=UserForm(request.POST,prefix='user')
         upf=UserProfileForm(request.POST,prefix='profile')
-        if uf.is_valid()*upf.is_valid() :
+        if uf.is_valid() and upf.is_valid() :
             
             #use function!
 
@@ -36,10 +36,10 @@ def SingleRegister(request):
 
 
 def GroupRegister(request):
-    """
+    
     if len(GroupProfile.objects.all()) >= MAXGROUPNUMBER:
         return render(request,'groupfull.html')
-    """
+    
     if request.method == 'POST':
         group_user_form = GroupUserForm(request.POST,prefix='user')
         group_profile_form= GroupForm(request.POST,prefix='profile')
@@ -71,8 +71,10 @@ def help(request):
 
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('home'))
 
+    return HttpResponseRedirect(reverse('home'))
+def home_start(request):
+    return render(request,'start.html')
 
 class EditProfile(UpdateView):
 
@@ -103,8 +105,10 @@ def SaveForm_then_login(request,uf,upf,userType):
     
     if userType=='single':
         user.last_name=request.POST['profile-name']
-    else : user.last_name=request.POST['user-username']
+    else : 
+        user.last_name=request.POST['user-username']
     
+    human=True
     user.save()
     profile=upf.save(commit=False)
     profile.user=user

@@ -1,22 +1,174 @@
+<!--
+|-百度校园推广搜索大赛-
+|主办方：浙江大学企业俱乐部联合会百度俱乐部
+|合作方：浙江大学学生博雅国学社
+|Copyright © 2014 ZJU Baidu Club. All Rights Reserved
+-->
 
-
+{% load staticfiles %}
+<!DOCTYPE HTML>
+    <!--  header  -->
 <html>
 <head>
-<title>hei</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta charset="UTF-8" />
+<title>搜索大赛</title> 
+
+<link rel="shortcut icon" href="{% static 'img/shortcut.jpg' %}">
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/square/grey.css' %}">
+<link rel="stylesheet" href="{% static 'css/baidu.css' %}">
+
+
+<style type="text/css">
+
+label.form_label{
+    display: block;
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 6px;
+    width: 0;
+    height: 24px;
+    overflow: hidden;
+    padding: 0 0 0 24px;
+    background: url("{% static 'img/form_icon.png' %}") no-repeat;
+    z-index: 20;
+}
+
+label.form_label_phone{
+    background-position: 0 0;
+}
+label.form_label_phone_error{
+    background-position: 0 -48px;
+}
+label.form_label_user{
+    background-position: 0 -72px;
+}
+label.form_label_user_error{
+    background-position: 0 -120px;
+}
+label.form_label_password{
+    background-position: 0 -144px;
+}
+label.form_label_password_error{
+    background-position: 0 -192px;
+}
+label.form_label_id{
+    background-position: 0 -216px;
+}
+label.form_label_id_error{
+    background-position: 0 -264px;
+}
+
+</style>
+
+
 </head>
+
 <body>
-header
+
+        <!-- 顶部标题栏  -->
+
+
+<header class="navbar navbar-inverse navbar-fixed-top" role="banner" data-target=".navbar" data-offset=40>
+    <div class="container">
+
+
+    <div class="navbar-header">
+        <button class="navbar-default navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="{% url 'home' %}" class="navbar-brand">百度菁英俱乐部</a>
+    </div>
+
+    <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+            <li title="首页">
+                <a href="{% url 'home' %}">首页</a>
+            </li>
+            <li title="规则">
+                <a href="{% url 'helptext' %}">规则</a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="">报名<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{% url 'single_register' %}">线上大赛报名</a></li>
+                    <li><a href="{% url 'group_register' %}">线下大赛报名</a></li>
+                </ul>
+            </li>
+            <li title="答题">
+                <a href="{% url 'start' %}">答题</a>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right nav-pills">
+            <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">其他<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">关于</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">~彩蛋~</a></li>
+                </ul>
+            </li> 
+
+        </ul>
+    </nav>
+
+
+    </div>
+</header>
+
+        <!-- /顶部标题栏  -->
+
+
+    <!--  /header  -->
+
 
 {%block content%}
 {%endblock%}
 
-<div>
-footer
-<a href="{% url 'home'%}">home</a>
-|{{user.last_name}}
-<a href="{%url 'edit_profile'%}">edit</a>
-<a href="{%url 'logout'%}">logout</a>
-<div>
+
+
+    <!--  footer  -->
+    <div class="row footer">
+        <div class="container">
+            <footer>
+                <hr />
+                <p>主办方：浙江大学企业俱乐部联合会百度俱乐部</p>
+                <p>合作方：浙江大学学生博雅国学社</p>
+
+                <p>Copyright © 2014 ZJU <a href="http://baiduzju.org">Baidu Club</a>. All Rights Reserved</p>
+            </footer>
+        </div>
+    </div>
+
+
+<script src="{% static 'js/jQuery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/baidu.js' %}"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-grey',
+        radioClass: 'iradio_square-grey',
+        increaseArea: '20%' // optional
+    });
+
+
+    $(".pinned").pin({
+        containerSelector: ".container", minWidth: 940;
+    });
+</script>
+
 </body>
 
+
 </html>
+
+    <!--  /footer  -->
