@@ -1,12 +1,134 @@
-{% extends "base.html" %}
+{%extends "base.html"%}
 
-{% block content %}
-<h2>{{ user.username }}'s Profile</h2>
+{%block content%}
+    <!-- main -->
+    <div class="row" id="head">
 
-<form method="post" action="">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Edit">
-</form>
+        <div class="jumbotron">
+            <br/>
+            <div class="container" >
+                <h1>百度校园推广搜索大赛</h1>
+                <h3>—线下比赛—</h3>
+                <h3>查看/修改资料</h3>
+                <br />
+            </div>
+        </div>
+    </div>
 
-{% endblock %}
+    <div class="row main light_grey">
+        <div class="container">
+
+            <div class="col-md-3"></div>
+
+            <div class="col-md-6">
+                <h1>线上大赛报名</h1>
+                <form class="reg_form" role="form" method="post" autocomplete="OFF" 
+                       action="">
+                {% csrf_token %}
+                        <!--基本信息板块-->
+
+
+                    <div>
+                        <label>队名</label>
+                        <label class="form_label form_label_user">队名</label>
+                        <input type="text" class="form-control form_padding" value="{{user.last_name}}" disabled/>
+                    </div>
+                        <!--/基本信息板块-->
+
+                    <br />
+                        <!-- 1 -->
+                    <br />
+                    <p>搜索组选手</p>
+                    <div>
+                        <label for="{{form.name1.id_for_label}}" id="form_label_name1{% if form.name.errors %}_error{% endif %}" 
+                            class="form_label form_label_user{% if form.name1.errors %}_error{% endif %}">姓名</label>
+                        <input name="{{form.name1.html_name}}" id="form_name1" type="text" 
+                            class="form-control form_padding {% if form.name1.errors %} has-error {% endif %}" placeholder="姓名" />
+                    </div>
+                    {% if form.name1.errors %}
+                    <div class="callback_error">
+                        <p>{{form.name1.errors}}</p>
+                    </div>
+                    {% endif %}
+
+                    <div>
+                        <label for="{{form.studentid1.id_for_label}}" id="form_label_studentid1{% if form.studentid1.errors %}_error{% endif %}" 
+                            class="form_label form_label_id{% if form.studentid1.errors %}_error{% endif %}">学号</label>
+                        <input name="{{form.studentid1.html_name}}" id="form_studentid1" type="text" 
+                            class="form-control form_padding {% if form.studentid1.errors %} has-error {% endif %}" placeholder="学号" />
+                    </div>
+                    {% if form.studentid1.errors %}
+                    <div class="callback_error">
+                        <p>{{form.studentid1.errors}}</p>
+                    </div>
+                    {% endif %}   
+
+                    <div>
+                        <label for="{{form.phone1.id_for_label}}" id="form_label_phone1{% if form.phone1.errors %}_error{% endif %}" 
+                            class="form_label form_label_phone{% if form.phone1.errors %}_error{% endif %}">手机号码</label>
+                        <input name="{{form.phone1.html_name}}" id="form_phone1" type="text" 
+                            class="form-control form_padding {% if form.phone1.errors %} has-error {% endif %}" placeholder="手机号码" />
+                    </div>
+                    {% if form.phone1.errors %}
+                    <div class="callback_error">
+                        <p>{{form.phone1.errors}}</p>
+                    </div>
+                    {% endif %}
+
+                        <!-- 2 -->
+                    <br />
+                    <p>答题组选手</p>
+                    <div>
+                        <label for="{{form.name2.id_for_lebal}}" id="form_label_name2{% if form.name.errors %}_error{% endif %}" 
+                            class="form_label form_label_user{% if form.name2.errors %}_error{% endif %}">姓名</label>
+                        <input name="{{form.name2.html_name}}" id="form_name2" type="text" 
+                            class="form-control form_padding {% if form.name2.errors %} has-error {% endif %}" placeholder="姓名" />
+                    </div>
+                    {% if form.name2.errors %}
+                    <div class="callback_error">
+                        <p>{{form.name2.errors}}</p>
+                    </div>
+                    {% endif %}
+
+                    <div>
+                        <label for="{{form.studentid2.id_for_lebal}}" id="form_label_studentid2{% if form.studentid2.errors %}_error{% endif %}" 
+                            class="form_label form_label_id{% if form.studentid2.errors %}_error{% endif %}">学号</label>
+                        <input name="{{form.studentid2.html_name}}" id="form_studentid2" type="text" 
+                            class="form-control form_padding {% if form.studentid2.errors %} has-error {% endif %}" placeholder="学号" />
+                    </div>
+                    {% if form.studentid2.errors %}
+                    <div class="callback_error">
+                        <p>{{form.studentid2.errors}}</p>
+                    </div>
+                    {% endif %}   
+
+                    <div>
+                        <label for="{{form.phone2.id_for_lebal}}" id="form_label_phone2{% if form.phone2.errors %}_error{% endif %}" 
+                            class="form_label form_label_phone{% if form.phone2.errors %}_error{% endif %}">手机号码</label>
+                        <input name="{{form.phone2.html_name}}" id="form_phone2" type="text" 
+                            class="form-control form_padding {% if form.phone2.errors %} has-error {% endif %}" placeholder="手机号码" />
+                    </div>
+                    {% if form.phone2.errors %}
+                    <div class="callback_error">
+                        <p>{{form.phone2.errors}}</p>
+                    </div>
+                    {% endif %}
+                    <br />
+                    
+                    <br />
+                    <input id="submit_button" type="submit" class="btn btn-success" value="确认" style="width:100%">
+                </form>
+
+            </div>
+
+
+
+            <div class="col-md-3"></div>
+        </div>
+        <!-- End of .container -->
+    </div>
+    <!-- End of .row -->
+
+
+    <!--  /main  -->
+{%endblock%}

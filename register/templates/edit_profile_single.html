@@ -1,12 +1,86 @@
 {% extends "base.html" %}
 
-{% block content %}
-<h2>{{ user.username }}'s Profile</h2>
+{%block content%}
+    <!-- main -->
+    <div class="row" id="head">
 
-<form method="post" action="">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Edit">
-</form>
+        <div class="jumbotron">
+            <br/>
+            <div class="container" >
+                <h1>百度校园推广搜索大赛</h1>
+                <h3>—线上比赛—</h3>
+                <h3>查看/修改资料</h3>
+                <br />
+            </div>
+        </div>
+    </div>
 
+    <div class="row main light_grey">
+        <div class="container">
+
+            <div class="col-md-3"></div>
+
+            <div class="col-md-6">
+                <h1>所有信息</h1>
+                <form class="reg_form" role="form" method="post" autocomplete="OFF" 
+                       action="">
+                {% csrf_token %}
+                        <!--基本信息板块-->
+
+                    <div>
+                        <label class="form_label form_label_user">学号</label>
+                        <input type="text" class="form-control form_padding" value="{{user.last_name}}" disabled/>
+                    </div>
+                    <br />
+
+                    <div>
+                        <label for="{{form.name.id_for_label}}" id="form_label_name{% if form.name.errors %}_error{% endif %}" 
+                            class="form_label form_label_user{% if form.name.errors %}_error{% endif %}">姓名</label>
+                        <input name="{{form.name.html_name}}" id="form_name" type="text" 
+                            class="form-control form_padding {% if form.name.errors %} has-error {% endif %}" placeholder="姓名" />
+                    </div>
+                    {% if form.name.errors %}
+                    <div class="callback_error">
+                        <p>{{form.name.errors}}</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div>
+                        <label for="{{form.cellphone.id_for_label}}" id="form_label_cellphone{% if form.cellphone.errors %}_error{% endif %}" 
+                            class="form_label form_label_phone{% if form.cellphone.errors %}_error{% endif %}">手机号码</label>
+                        <input name="{{form.cellphone.html_name}}" id="form_cellphone" type="text" 
+                            class="form-control form_padding {% if form.cellphone.errors %} has-error {% endif %}" placeholder="手机号码" />
+                    </div>
+                    {% if form.cellphone.errors %}
+                    <div class="callback_error">
+                        <p>{{form.cellphone.errors}}</p>
+                    </div>
+                    {% endif %}
+                    
+                        <!--/基本信息板块-->
+                    <div>
+                        验证码
+                         {{form.captcha}} 
+
+                        <div class="callback_error">
+                            <p>{{form.captcha.errors}}</p>
+                        </div>
+                    </div>
+
+                    <br />
+                    <input id="submit_button" type="submit" class="btn btn-success" value="确认" style="width:100%">
+                </form>
+
+            </div>
+
+
+
+            <div class="col-md-3"></div>
+        </div>
+        <!-- End of .container -->
+    </div>
+    <!-- End of .row -->
+
+
+    <!--  /main  -->
 {% endblock %}

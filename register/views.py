@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
+from django.contrib.auth.models import User
 
 MAXGROUPNUMBER = 6
 
@@ -62,6 +63,15 @@ def GroupRegister(request):
 @login_required                    
 def thanks(request):
     return render(request,'thanks.html')
+@login_required
+def edit_success(request):
+    if request.user.first_name=="single":
+        u=User.objects.get(username=request.user.username)
+        u.last_name = UserProfile.objects.get(user=request.user).name
+        u.save()
+        request.user.last_name=u.last_name
+
+    return render(request,'edit_success.html')
 
 def home(request):
     return render(request,'home.html')
@@ -76,9 +86,10 @@ def user_logout(request):
 def home_start(request):
     return render(request,'start.html')
 
+
 class EditProfile(UpdateView):
 
-    success_url= reverse_lazy('home')
+    success_url= reverse_lazy('edit_success')
     
     def get_object(self, queryset=None):
         if self.request.user.first_name=="group":
@@ -96,8 +107,9 @@ class EditProfile(UpdateView):
             return 'edit_profile_group.html'
         else:
             return 'edit_profile_single.html'
-
-
+    
+   
+    
 def SaveForm_then_login(request,uf,upf,userType):
 
     user=uf.save(commit=False)
@@ -118,3 +130,5 @@ def SaveForm_then_login(request,uf,upf,userType):
     password=request.POST['user-password1']
     u=authenticate(username=username,password=password)
     login(request,u)
+
+

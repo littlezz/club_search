@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     url(r'^logout',views.user_logout,name='logout'),
     url(r'^help/$',views.help,name='helptext'),
     url(r'^start/$',views.home_start,name='start'),
+    url(r'^edit_success/$',views.edit_success,name='edit_success'),
     url('^captcha/',include('captcha.urls')),
 )

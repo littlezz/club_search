@@ -843,6 +843,12 @@ $("#form_name2").blur(function(){
 });
 
 //password
+$("#form_password").focus(function(){
+    $("#form_label_password").css("background-position", "0 -168px");
+});
+$("#form_password").blur(function(){
+    $("#login_label_password").css("background-position", "0 -120px");
+});
 $("#form_password1").focus(function(){
     $("#form_label_password1").css("background-position", "0 -168px");
 });

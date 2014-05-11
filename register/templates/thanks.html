@@ -1,4 +1,4 @@
-{%extands "base.html"%}
+{%extends "base.html"%}
 
 {%block content%}
         <!--  main  -->
@@ -8,16 +8,16 @@
         <div class="jumbotron">
             <br/>
             <div class="container" >
-                <h1>线上大赛注册</h1>
+                <h1>百度校园推广搜索大赛</h1>
+                <a href="{% url 'home' %}" class="btn white_btn">回到首页</a>
                 <br />
             </div>
         </div>
     </div>
 
     <div class="row main">
-        <div class="container">
-            <p>注册成功</p>
-            <p>欢迎您，{{user.last_username}}</p>
+        <div class="container center">
+            <p>欢迎您，{{user.last_name}}</p>
             <p><b id="timing">5</b>秒后返回首页</p>
         </div>
     </div>
